@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vital2serum"
+version = "1.0.0"
+description = "Vital 1.x to Serum 2 preset converter with Vital-accurate wavetable rendering, embedded tables and loss reports"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE.txt", "NOTICE.txt"]
+dependencies = ["zstandard>=0.22,<1", "numpy>=1.24"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+vital2serum = "vital2serum.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["vital2serum*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+vital2serum = ["data/*.SerumPreset"]

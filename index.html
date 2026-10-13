@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>vital2serum</title>
+<meta name="description" content="Unofficial Vital to Serum 2 preset converter. Runs in your browser; files are not uploaded.">
+<meta name="theme-color" content="#1e1e1e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="vital2serum">
+<meta property="og:description" content="Unofficial Vital → Serum 2 preset converter. Runs in your browser; files are not uploaded.">
+<meta property="og:url" content="https://nisaiae.github.io/vital2serum/">
+<meta property="og:image" content="https://nisaiae.github.io/vital2serum/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.png" type="image/png" sizes="64x64">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>vital2serum <span id="version"></span></h1>
+  <button id="lang" type="button" aria-label="Language">EN</button>
+</header>
+<main>
+  <div id="convert">
+  <div id="drop" role="button" tabindex="0">
+    <p id="drop-title" data-i18n="drop"></p>
+    <p id="drop-sub" data-i18n="formats"></p>
+  </div>
+  <input id="files" type="file" accept=".vital" multiple hidden>
+  <div id="bar" hidden>
+    <span id="summary"></span>
+    <span class="spacer"></span>
+    <button id="clear" type="button" data-i18n="clear"></button>
+    <button id="download" type="button" class="primary" data-i18n="download" disabled></button>
+  </div>
+  <ul id="list"></ul>
+  </div>
+  <section id="notes" hidden>
+    <div class="notes-head">
+      <h2>Release Notes</h2>
+      <button id="back" type="button" data-i18n="back"></button>
+    </div>
+    <div id="notes-list"></div>
+  </section>
+</main>
+<footer>
+  <span data-i18n="local"></span>
+  <span data-i18n="unofficial"></span>
+  <span data-i18n="rights"></span>
+  <span><a href="https://github.com/NisaiAE/vital2serum" target="_blank" rel="noopener">Source</a> · <a href="LICENSE.txt" target="_blank" rel="noopener">GPL-3.0</a> · <a href="NOTICE.txt" target="_blank" rel="noopener">Notices</a> · <a href="#release-notes">Release Notes</a></span>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

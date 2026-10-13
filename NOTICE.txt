@@ -1,0 +1,101 @@
+vital2serum
+Copyright (C) 2026 the vital2serum contributors
+SPDX-License-Identifier: GPL-3.0-or-later
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License in LICENSE.txt for
+more details.
+
+vital2serum is a modified work. It was written in 2026 as a converter from
+Vital to Serum 2, and contains material ported from and derived from the two
+works below. Both are licensed under GPL-3.0-or-later.
+
+
+1. Vital
+
+   Copyright 2013-2019 Matt Tytel
+   https://github.com/mtytel/vital
+   Commit: 636ca0ef517a4db087a6a08a6a8a5e704e21f836
+
+   vital2serum/wavetable.py is a Python port, with changes, of the wavetable
+   rendering in
+     src/common/wavetable/wavetable_creator.cpp
+     src/common/wavetable/wavetable_group.cpp
+     src/common/wavetable/wavetable_component.cpp
+     src/common/wavetable/wavetable_keyframe.cpp
+     src/common/wavetable/wave_source.cpp
+     src/common/wavetable/wave_line_source.cpp
+     src/common/wavetable/file_source.cpp
+     src/common/wavetable/wave_warp_modifier.cpp
+     src/common/wavetable/wave_fold_modifier.cpp
+     src/common/wavetable/frequency_filter_modifier.cpp
+     src/common/wavetable/phase_modifier.cpp
+     src/common/wavetable/wave_window_modifier.cpp
+     src/common/line_generator.cpp
+   and its oscillator warps and spectral morphs follow
+     src/synthesis/producers/synth_oscillator.cpp
+
+   vital2serum/spectral.py uses the full-table spectral morph, phase and
+   amplitude formulas from
+     src/synthesis/producers/spectral_morph.h
+     src/synthesis/lookups/wavetable.cpp
+     src/synthesis/framework/futils.h
+
+   vital2serum/ranges.py and vital2serum/defaults.py hold parameter ranges and
+   defaults from
+     src/common/synth_parameters.cpp
+
+   vital2serum/curves.py and vital2serum/modulation.py use formulas from
+     src/synthesis/framework/futils.h
+     src/synthesis/modules/modulation_connection_processor.cpp
+
+
+2. serum2vital
+
+   Copyright (C) the serum2vital authors
+   https://github.com/btesser/serum2vital
+   Commit: b67d9d3d0b8e03c9930d6b8f81eca0e4a9560e35
+
+   The description of the Serum 2 preset container, the Vital parameter
+   table, mapping tables and several conversion laws are derived from it, in
+   the opposite direction:
+     vital2serum/serum.py, vital2serum/mapping.py, vital2serum/modulation.py,
+     vital2serum/effects.py, vital2serum/defaults.py
+
+   The bundled file
+     vital2serum/data/Init-2.0.24.SerumPreset
+   is an unmodified copy of that repository's
+     DebugPresets/1.SerumPreset
+     Git blob SHA-1: e68328daa7fb52892ebff9cad28cc512f31e5913
+   It is a preset saved from the initial state of Serum 2.0.24. It holds
+   default parameter state and the names of stock files, and no wavetable or
+   sample audio. A preset saved by another copy of Serum can be used in its
+   place with --template.
+
+   serum2vital is not the author or endorser of this converter.
+
+
+Web version
+
+The web page runs this package in the browser. It loads the following from the
+jsDelivr CDN; they are not part of this repository:
+  Pyodide 0.28.3      MPL-2.0        https://pyodide.org/
+  NumPy               BSD-3-Clause   https://numpy.org/
+  python-zstandard    BSD-3-Clause   https://github.com/indygreg/python-zstandard
+
+
+Names
+
+Serum is a product of Xfer Records. Vital is a product of Vital Audio. The
+names are used only to say which file formats this program reads and writes.
+This project is not affiliated with, endorsed by or sponsored by Xfer Records,
+Vital Audio or Matt Tytel.
+
+Converting a preset does not change the terms under which the preset, or the
+wavetables and samples inside it, were licensed.
