@@ -426,7 +426,7 @@ def _fold_fixed_warp_axis(c: Context):
         if not v.get(p+'on') or v.integer(p+'distortion_type',0,12) not in PHASE_WARPS:
             continue
         frame_moves=p+'wave_frame' in moving
-        morph_moves=(v.integer(p+'spectral_morph_type',0,11) in BAKED_MORPHS
+        morph_moves=(v.integer(p+'spectral_morph_type',0,16) in BAKED_MORPHS
                      and p+'spectral_morph_amount' in moving)
         if int(frame_moves)+int(morph_moves)!=1 or p+'distortion_phase' in moved:
             continue
@@ -533,7 +533,7 @@ def _oscillators(c: Context,allow_placeholder: bool):
         # A spectral morph or a phase warp with a fixed amount is a fixed table: render it into the
         # frames. Where the amount moves and the table position does not, the table becomes a sweep
         # over the amount and the modulation drives the position instead.
-        morph_type=v.integer(p+'spectral_morph_type',0,11)
+        morph_type=v.integer(p+'spectral_morph_type',0,16)
         morph_amount=c.unit(v.get(p+'spectral_morph_amount'),p+'spectral_morph_amount')
         wtype=v.integer(p+'distortion_type',0,12)
         amount=c.unit(v.get(p+'distortion_amount'),p+'distortion_amount')
@@ -595,9 +595,9 @@ def _oscillators(c: Context,allow_placeholder: bool):
                    original=detune_range,converted=native_range)
         mode=unison.detune_mode(voices,c.clip(v.get(p+'detune_power'),-5,5,p+'detune_power'))
         if mode: params['kParamDetuneMode']=mode
-        stack=v.integer(p+'stack_style',0,10)
+        stack=v.stack_style(p+'stack_style')
         if stack not in stacks:
-            r.note('unsupported',p+'stack_style','Chord/harmonic unison stack reduced to ordinary unison.',style=stack)
+            r.note('unsupported',p+'stack_style','Chord/harmonic unison stack reduced to ordinary unison.',style=round(v.get(p+'stack_style')))
         elif stacks[stack]: params['kParamUnisonStack']=stacks[stack]
         m['plainParams']=params
         nframes=a.frames//2048
@@ -943,7 +943,7 @@ def _lfos(c: Context):
     moving={m.target for j,m in mods.items() if j not in v.folded}
     phase_sources=_lfo_phase_sources(mods)
     for i in range(1,9):
-        p=f'lfo_{i}_';sync=v.integer(p+'sync',0,4);mode=v.integer(p+'sync_type',0,5)
+        p=f'lfo_{i}_';sync=v.integer(p+'sync',0,4);mode=v.integer(p+'sync_type',0,6)
         terminal_hold=(sync==0 and mode==2 and abs(v.get(p+'phase'))<1e-9
                        and f'lfo_{i}' not in phase_sources
                        and not any(p+x in moving for x in ('phase','frequency','tempo','sync','sync_type',

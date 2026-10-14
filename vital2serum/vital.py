@@ -25,6 +25,7 @@ class VitalPreset:
             if int(major) > 1:
                 raise ConversionError(f"Unsupported Vital version {version}")
         self.doc, self.settings, self.source = doc, doc['settings'], source
+        self.version = tuple(int(part) for part in (version or '').split('.')[:3] if part.isdigit())
         self.used: set[str] = set()
         # Static modulation folded into the stored values (see mapping.fold_static_modulations).
         self.offsets: dict[str,float] = {}
@@ -81,6 +82,17 @@ class VitalPreset:
         if abs(v-round(v)) > 1e-5 or not lo <= round(v) <= hi:
             raise ConversionError(f"{key} must be an integer from {lo} through {hi}")
         return round(v)
+
+    def stack_style(self,key: str) -> int | None:
+        """A unison stack style in Vital 1.0's numbering, or None for a style that 1.0 does not have.
+
+        Later versions insert 'Octave + 7' at 4 and add 'Sub Harmonics' at 12. Vital 1.6.4 shifts the
+        styles of a 1.0.8 preset from 4 up by one and keeps those of 1.1.0 and later (measured)."""
+        if self.version<(1,1):
+            return self.integer(key,0,10)
+        style=self.integer(key,0,12)
+        if style in (4,12): return None
+        return style-1 if style>4 else style
 
     def array(self,key: str) -> list:
         self.used.add(key)

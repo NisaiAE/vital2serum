@@ -59,7 +59,7 @@ def _correlated_controls(v, prefix: str) -> Trajectory | None:
     mods=active_modulations(v);into=amount_modulators(mods)
     active={i:m for i,m in mods.items() if i not in v.folded and (abs(m.amount)>1e-12 or into.get(i))}
     kind=v.integer(prefix+'distortion_type',0,12)
-    morph_kind=v.integer(prefix+'spectral_morph_type',0,11)
+    morph_kind=v.integer(prefix+'spectral_morph_type',0,16)
     if kind not in (0,*PHASE_WARPS) or morph_kind not in (0,*BAKED_MORPHS,*TRAJECTORY_MORPHS):
         return None
     if morph_kind and abs(v.get(prefix+'spectral_morph_phase')-.5)>1e-6:

@@ -42,6 +42,7 @@ def test_keytracking_on_keeps_its_pitch_controls(template,doc):
 
 @pytest.mark.parametrize('warp',[7,10])
 def test_fixed_pitch_preserves_cross_warp_and_unison_stack(template,doc,warp):
+    doc['synth_version']='1.0.7'                 # stack style 5 is Power Chord in Vital 1.0's numbering
     doc['settings'].update(osc_2_on=1,wavetables=[wave(),wave()],osc_1_transpose=12,
         osc_1_distortion_type=warp,osc_1_distortion_amount=.3,osc_1_stack_style=5,
         osc_1_unison_voices=3)

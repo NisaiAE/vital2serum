@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vital2serum"
-version = "1.0.0"
+version = "1.0.1"
 description = "Vital 1.x to Serum 2 preset converter with Vital-accurate wavetable rendering, embedded tables and loss reports"
 readme = "README.md"
 requires-python = ">=3.10"

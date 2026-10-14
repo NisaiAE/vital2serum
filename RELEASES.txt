@@ -1,2 +1,6 @@
+1.0.1 (2026.10.14)
+Fix conversion failing on presets that use newer Vital LFO modes or spectral morphs
+Fix unison stack styles in presets saved by Vital 1.5 and later
+
 1.0.0 (2026.10.13)
 Initial release

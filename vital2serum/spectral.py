@@ -24,7 +24,7 @@ def static_eligible(v, prefix: str) -> bool:
     """Retain the old path when the fixed spectrum or Shepard pitch cannot be represented."""
     used=set(v.used)
     try:
-        kind=v.integer(prefix+'spectral_morph_type',0,11)
+        kind=v.integer(prefix+'spectral_morph_type',0,16)
         if kind not in STATIC_MORPHS: return False
         mods=active_modulations(v);into=amount_modulators(mods)
         active={i:m for i,m in mods.items() if i not in v.folded and (abs(m.amount)>1e-12 or into.get(i))}
